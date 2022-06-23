@@ -1,3 +1,4 @@
+"use strict";
 let num = 21;
 
 if (num == 20) {            //Условия
