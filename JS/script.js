@@ -17,6 +17,9 @@
 
 // Код возьмите из предыдущего домашнего задания
 //-------------------------------------------------------------------------
+
+let numbetOfFilms;
+
 let personalMovieDB = {
     count: {},
     movies: {},
@@ -25,7 +28,18 @@ let personalMovieDB = {
     privat: false
 };
 
-for (let i = 0; i < 2; i++){
+function start() {
+    numbetOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", '');
+
+    while (numbetOfFilms == '' || numbetOfFilms == null || isNaN(numbetOfFilms)) {
+        numbetOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", '');
+    }
+}
+
+start();
+
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++){
         const a = prompt("Один из последних посмотренных фильмов", ''),
             b = prompt("На сколько оцените его?", '');
         if (a != null && b != null && a != '' && b != '' && a.length < 50){
@@ -35,14 +49,38 @@ for (let i = 0; i < 2; i++){
             console.log('error');
             i--;
         }
+    }
 }
 
-if (personalMovieDB.count < 10) {
-    alert('Просмотрено довольно мало фильмов');
-} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-    alert('Вы классический зритель');
-} else if (personalMovieDB.count >= 30) {
-    alert("Вы киноман");
-} else {
-    alert('ERROR');
+rememberMyFilms();
+
+function detectPersonalLevel() {
+    if (personalMovieDB.count < 10) {
+        alert('Просмотрено довольно мало фильмов');
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        alert('Вы классический зритель');
+    } else if (personalMovieDB.count >= 30) {
+        alert("Вы киноман");
+    } else {
+        alert('ERROR');
+    }
 }
+
+detectPersonalLevel();
+
+function showMyDB() {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    }
+}  
+
+showMyDB();
+
+function writeYourGenres() {
+    for (let i = 1; i <= 3; i++) {
+        const genre = prompt(`Ваш любимый жанр под номером ${i}`);
+        personalMovieDB.genres[i -1] = genre;
+    }
+}
+
+writeYourGenres();
